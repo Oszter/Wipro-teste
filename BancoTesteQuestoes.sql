@@ -13,23 +13,13 @@ WHERE
 		
 --2 
 SELECT
-    p.idProcesso AS processo, p.dtEncerramento as data,
+    idProcesso
 FROM 
-    tbProcesso p
-WHERE 
-    data =
-    (
-        SELECT MAX
-        (
-        SELECT s.dtEncerramento  - s.dtEntrada 
-        FROM tbProcesso s
-        )
-FROM 
-    tbProcesso
-WHERE 
-    data LIKE 2013%)
-GROUP BY 
-    processo
+    tb_Andamento 
+WHERE YEAR
+    (dtAndamento) = '2013' 
+ORDER BY 
+    dtAndamento DESC
 
 
 --3
@@ -47,4 +37,8 @@ FROM (
 		t1.qtd >= 5
 
 --4
-SELECT REPLICATE('0', 12 - LEN(nroProcesso)) + RTrim(nroProcesso) FROM tb_Processo;
+SELECT REPLICATE
+    ('0', 12 - LEN(nroProcesso)) + 
+    RTrim(nroProcesso) 
+FROM 
+    tb_Processo;
